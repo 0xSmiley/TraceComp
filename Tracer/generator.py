@@ -7,7 +7,6 @@ int syscall_%(struct pt_regs *ctx) {
 }
 """
 
-
 def main():
     fd=open("modules.c", "a+")
     with open(Syscalllpath, "r") as f:
