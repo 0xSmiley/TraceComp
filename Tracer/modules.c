@@ -1,0 +1,4 @@
+int syscall__clone( struct pt_regs *ctx) {
+    bpf_trace_printk("Clone test! %d\\n");
+    return 0;
+}
