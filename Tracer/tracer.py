@@ -11,10 +11,10 @@ def main():
     prog=load_modules()
     print(prog)
     prog2 = """
-        int syscall__clone(struct pt_regs *ctx) {
-            bpf_trace_printk("Hello, Clone! %d\\n");
-            return 0;
-        }
+int clone(struct pt_regs *ctx) {
+    bpf_trace_printk("Hello, Clone! \\n");
+    return 0;
+}
         """
     print(prog2)
     b = BPF(text=prog)
