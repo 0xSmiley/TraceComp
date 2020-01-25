@@ -9,14 +9,6 @@ def load_modules():
 
 def main():
     prog=load_modules()
-    #print(prog)
-    prog2 = "
-int clone(struct pt_regs *ctx) {
-    bpf_trace_printk("Hello, Clone!\\n");
-    return 0;
-}
-        "
-    #print(prog2)
     b = BPF(text=prog)
     b.attach_kprobe(event=b.get_syscall_fnname("clone"), fn_name="clone")
 
