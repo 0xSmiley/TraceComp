@@ -23,11 +23,11 @@ def main():
         if b.get_kprobe_functions(syscall):
             try: 
                 b.attach_kprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
-                logf.write("Tracing "+syscall+"\n")
+                logf.write("Tracing "+syscall+'\n')
             except:
-                logf.write("Failed to trace "+syscall)    
+                logf.write("Failed to trace "+syscall+'\n')    
         else:
-            logf.write("Failed to trace "+syscall)
+            logf.write("Failed to trace "+syscall+'\n')
             continue
 
     logf.close()
