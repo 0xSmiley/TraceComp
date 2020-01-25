@@ -8,8 +8,14 @@ def load_bpf():
     return bpf
 
 def main():
-    prog=load_bpf()
-    print(prog)
+    #prog=load_bpf()
+    #print(prog)
+    prog = """
+        int hello( struct pt_regs *ctx) {
+            bpf_trace_printk("Hello, Clone! %d\\n");
+            return 0;
+        }
+        """
     b = BPF(text=prog)
     b.attach_kprobe(event=b.get_syscall_fnname("clone"), fn_name="syscall__clone")
     #b.trace_print()
