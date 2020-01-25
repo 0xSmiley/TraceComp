@@ -20,11 +20,13 @@ def main():
     syscalls=load_syscalls()
     for syscall in syscalls:
         syscall=syscall.strip()
-        try:
+        if b.get_kprobe_functions(syscall):
             b.attach_kprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
-        except:
+            logf.write("Tracing "+syscall)
+        else:
             logf.write("Failed to trace "+syscall)
             continue
+
     logf.close()
 
     print("%-18s %-16s %-6s %s" % ("TIME(s)", "COMM", "PID", "MESSAGE"))
