@@ -11,7 +11,7 @@ def main():
     #prog=load_bpf()
     #print(prog)
     prog = """
-        int hello( struct pt_regs *ctx) {
+        int syscall__clone( struct pt_regs *ctx) {
             bpf_trace_printk("Hello, Clone! %d\\n");
             return 0;
         }
