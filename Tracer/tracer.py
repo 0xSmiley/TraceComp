@@ -21,8 +21,10 @@ def main():
         syscall=syscall.strip()
         try:
             b.attach_kprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
+            print("Tracing "+syscall)
         except:
-            print("Can't trace "+syscall)
+            #print("Can't trace "+syscall)
+            continue
 
     print("%-18s %-16s %-6s %s" % ("TIME(s)", "COMM", "PID", "MESSAGE"))
     while 1:
