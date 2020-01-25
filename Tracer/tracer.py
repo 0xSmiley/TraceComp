@@ -19,6 +19,7 @@ def main():
     syscalls=load_syscalls()
     for syscall in syscalls:
         syscall=syscall.strip()
+        print(b.get_syscall_fnname(syscall))
         b.attach_kprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
 
     print("%-18s %-16s %-6s %s" % ("TIME(s)", "COMM", "PID", "MESSAGE"))
