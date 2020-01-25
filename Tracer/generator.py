@@ -1,7 +1,7 @@
 Syscalllpath="parsed.txt"
 
 moduleEx="""
-int %(struct pt_regs *ctx) {
+int syscall_%(struct pt_regs *ctx) {
     bpf_trace_printk("Syscall->%");
     return 0;
 }

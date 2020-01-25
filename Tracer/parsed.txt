@@ -357,7 +357,6 @@ setitimer
 setns
 setpgid
 setpgrp
-setpgid
 setpriority
 setregid
 setregid32
@@ -407,7 +406,6 @@ statfs64
 statx
 stime
 subpage_prot
-swapcontext
 switch_endian
 swapcontext
 swapoff

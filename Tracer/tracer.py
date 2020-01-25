@@ -10,7 +10,7 @@ def load_modules():
 def main():
     prog=load_modules()
     b = BPF(text=prog)
-    b.attach_kprobe(event=b.get_syscall_fnname("clone"), fn_name="clone")
+    b.attach_kprobe(event=b.get_syscall_fnname("clone"), fn_name="syscall_clone")
 
     print("%-18s %-16s %-6s %s" % ("TIME(s)", "COMM", "PID", "MESSAGE"))
     while 1:
