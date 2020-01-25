@@ -11,18 +11,18 @@ def main():
     prog=load_bpf
     b = BPF(text=prog)
     b.attach_kprobe(event=b.get_syscall_fnname("clone"), fn_name="syscall__clone")
-#b.trace_print()
+    #b.trace_print()
 
-# header
-print("%-18s %-16s %-6s %s" % ("TIME(s)", "COMM", "PID", "MESSAGE"))
+    # header
+    print("%-18s %-16s %-6s %s" % ("TIME(s)", "COMM", "PID", "MESSAGE"))
 
-# format output
-while 1:
-    try:
-        (task, pid, cpu, flags, ts, msg) = b.trace_fields()
-    except ValueError:
-        continue
-    print("%-18.9f %-16s %-6d %s" % (ts, task, pid, msg))
+    # format output
+    while 1:
+        try:
+            (task, pid, cpu, flags, ts, msg) = b.trace_fields()
+        except ValueError:
+            continue
+        print("%-18.9f %-16s %-6d %s" % (ts, task, pid, msg))
 
 #!/usr/bin/python
 #from bcc import BPF
