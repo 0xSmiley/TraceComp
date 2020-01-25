@@ -9,6 +9,7 @@ def load_bpf():
 
 def main():
     prog=load_bpf()
+    print(prog)
     b = BPF(text=prog)
     b.attach_kprobe(event=b.get_syscall_fnname("clone"), fn_name="syscall__clone")
     b.trace_print()
