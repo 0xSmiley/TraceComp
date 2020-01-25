@@ -14,6 +14,7 @@ def load_syscalls():
     return syscalls
 
 def main():
+    logf = open("logTracer.log", "w")
     prog=load_modules()
     b = BPF(text=prog)
     syscalls=load_syscalls()
@@ -21,10 +22,10 @@ def main():
         syscall=syscall.strip()
         try:
             b.attach_kprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
-            print("Tracing "+syscall)
         except:
-            #print("Can't trace "+syscall)
+            logf.write("Failed to trace "+syscall)
             continue
+    logf.close()
 
     print("%-18s %-16s %-6s %s" % ("TIME(s)", "COMM", "PID", "MESSAGE"))
     while 1:
