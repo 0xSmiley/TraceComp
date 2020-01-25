@@ -21,8 +21,11 @@ def main():
     for syscall in syscalls:
         syscall=syscall.strip()
         if b.get_kprobe_functions(syscall):
-            b.attach_kprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
-            logf.write("Tracing "+syscall)
+            try: 
+                b.attach_kprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
+                logf.write("Tracing "+syscall+"\n")
+            except:
+                logf.write("Failed to trace "+syscall)    
         else:
             logf.write("Failed to trace "+syscall)
             continue
