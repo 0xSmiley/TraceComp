@@ -2,13 +2,13 @@ from bcc import BPF
 
 path="modules.c"
 
-def load_bpf(path):
+def load_bpf():
     with open(path, "r") as f:
         bpf = f.read()
     return bpf
 
 def main():
-    prog=load_bpf
+    prog=load_bpf()
     b = BPF(text=prog)
     b.attach_kprobe(event=b.get_syscall_fnname("clone"), fn_name="syscall__clone")
     #b.trace_print()
