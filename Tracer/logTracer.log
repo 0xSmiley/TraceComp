@@ -1,0 +1,467 @@
+Failed to trace _llseek
+Failed to trace _newselect
+Failed to trace _sysctl
+Tracing accept
+Tracing accept4
+Tracing access
+Tracing acct
+Tracing add_key
+Tracing adjtimex
+Tracing alarm
+Failed to trace alloc_hugepages
+Failed to trace arc_gettls
+Failed to trace arc_settls
+Failed to trace arc_usr_cmpxchg
+Tracing arch_prctl
+Failed to trace atomic_barrier
+Failed to trace atomic_cmpxchg_32
+Tracing bdflush
+Failed to trace bfin_spinlock
+Tracing bind
+Tracing bpf
+Tracing brk
+Failed to trace breakpoint
+Failed to trace cacheflush
+Tracing capget
+Tracing capset
+Tracing chdir
+Tracing chmod
+Tracing chown
+Failed to trace chown32
+Tracing chroot
+Tracing clock_adjtime
+Tracing clock_getres
+Tracing clock_gettime
+Tracing clock_nanosleep
+Tracing clock_settime
+Failed to trace clone2
+Tracing clone
+Tracing clone3
+Tracing close
+Failed to trace cmpxchg_badaddr
+Tracing connect
+Tracing copy_file_range
+Tracing creat
+Failed to trace create_module
+Tracing delete_module
+Failed to trace dma_memcpy
+Tracing dup
+Tracing dup2
+Tracing dup3
+Tracing epoll_create
+Tracing epoll_create1
+Tracing epoll_ctl
+Tracing epoll_pwait
+Tracing epoll_wait
+Tracing eventfd
+Tracing eventfd2
+Failed to trace execv
+Tracing execve
+Tracing execveat
+Tracing exit
+Tracing exit_group
+Tracing faccessat
+Tracing fadvise64
+Tracing fadvise64_64
+Tracing fallocate
+Tracing fanotify_init
+Tracing fanotify_mark
+Tracing fchdir
+Tracing fchmod
+Tracing fchmodat
+Tracing fchown
+Failed to trace fchown32
+Tracing fchownat
+Tracing fcntl
+Failed to trace fcntl64
+Tracing fdatasync
+Tracing fgetxattr
+Tracing finit_module
+Tracing flistxattr
+Tracing flock
+Tracing fork
+Failed to trace free_hugepages
+Tracing fremovexattr
+Tracing fsconfig
+Tracing fsetxattr
+Tracing fsmount
+Tracing fsopen
+Tracing fspick
+Tracing fstat
+Failed to trace fstat64
+Failed to trace fstatat64
+Tracing fstatfs
+Tracing fstatfs64
+Tracing fsync
+Tracing ftruncate
+Failed to trace ftruncate64
+Tracing futex
+Tracing futimesat
+Failed to trace get_kernel_syms
+Tracing get_mempolicy
+Tracing get_robust_list
+Tracing get_thread_area
+Failed to trace get_tls
+Tracing getcpu
+Tracing getcwd
+Tracing getdents
+Tracing getdents64
+Failed to trace getdomainname
+Failed to trace getdtablesize
+Tracing getegid
+Failed to trace getegid32
+Tracing geteuid
+Failed to trace geteuid32
+Tracing getgid
+Failed to trace getgid32
+Tracing getgroups
+Failed to trace getgroups32
+Tracing gethostname
+Tracing getitimer
+Tracing getpeername
+Failed to trace getpagesize
+Tracing getpgid
+Tracing getpgrp
+Tracing getpid
+Tracing getppid
+Tracing getpriority
+Tracing getrandom
+Tracing getresgid
+Failed to trace getresgid32
+Tracing getresuid
+Failed to trace getresuid32
+Tracing getrlimit
+Tracing getrusage
+Tracing getsid
+Tracing getsockname
+Tracing getsockopt
+Tracing gettid
+Tracing gettimeofday
+Tracing getuid
+Failed to trace getuid32
+Failed to trace getunwind
+Tracing getxattr
+Failed to trace getxgid
+Failed to trace getxpid
+Failed to trace getxuid
+Tracing init_module
+Tracing inotify_add_watch
+Tracing inotify_init
+Tracing inotify_init1
+Tracing inotify_rm_watch
+Tracing io_cancel
+Tracing io_destroy
+Tracing io_getevents
+Tracing io_pgetevents
+Tracing io_setup
+Tracing io_submit
+Tracing io_uring_enter
+Tracing io_uring_register
+Tracing io_uring_setup
+Tracing ioctl
+Tracing ioperm
+Tracing iopl
+Tracing ioprio_get
+Tracing ioprio_set
+Tracing ipc
+Tracing kcmp
+Failed to trace kern_features
+Tracing kexec_file_load
+Tracing kexec_load
+Tracing keyctl
+Tracing kill
+Tracing lchown
+Failed to trace lchown32
+Tracing lgetxattr
+Tracing link
+Tracing linkat
+Tracing listen
+Tracing listxattr
+Tracing llistxattr
+Tracing lookup_dcookie
+Tracing lremovexattr
+Tracing lseek
+Tracing lsetxattr
+Tracing lstat
+Failed to trace lstat64
+Tracing madvise
+Tracing mbind
+Failed to trace memory_ordering
+Failed to trace metag_get_tls
+Failed to trace metag_set_fpu_flags
+Failed to trace metag_set_tls
+Failed to trace metag_setglobalbit
+Tracing membarrier
+Tracing memfd_create
+Tracing migrate_pages
+Tracing mincore
+Tracing mkdir
+Tracing mkdirat
+Tracing mknod
+Tracing mknodat
+Tracing mlock
+Tracing mlock2
+Tracing mlockall
+Tracing mmap
+Failed to trace mmap2
+Tracing modify_ldt
+Tracing mount
+Tracing move_mount
+Tracing move_pages
+Tracing mprotect
+Tracing mq_getsetattr
+Tracing mq_notify
+Tracing mq_open
+Tracing mq_timedreceive
+Tracing mq_timedsend
+Tracing mq_unlink
+Tracing mremap
+Tracing msgctl
+Tracing msgget
+Tracing msgrcv
+Tracing msgsnd
+Tracing msync
+Tracing munlock
+Tracing munlockall
+Tracing munmap
+Tracing name_to_handle_at
+Tracing nanosleep
+Tracing newfstatat
+Failed to trace nfsservctl
+Tracing nice
+Failed to trace old_adjtimex
+Tracing old_getrlimit
+Failed to trace oldfstat
+Failed to trace oldlstat
+Failed to trace oldolduname
+Failed to trace oldstat
+Tracing oldumount
+Tracing olduname
+Tracing open
+Tracing open_by_handle_at
+Tracing open_tree
+Tracing openat
+Failed to trace or1k_atomic
+Tracing pause
+Tracing pciconfig_iobase
+Tracing pciconfig_read
+Tracing pciconfig_write
+Failed to trace perf_event_open
+Tracing personality
+Failed to trace perfctr
+Failed to trace perfmonctl
+Tracing pidfd_send_signal
+Tracing pidfd_open
+Tracing pipe
+Tracing pipe2
+Tracing pivot_root
+Tracing pkey_alloc
+Tracing pkey_free
+Tracing pkey_mprotect
+Tracing poll
+Tracing ppoll
+Tracing prctl
+Failed to trace pread
+Tracing pread64
+Tracing preadv
+Tracing preadv2
+Tracing prlimit64
+Tracing process_vm_readv
+Tracing process_vm_writev
+Tracing pselect6
+Tracing ptrace
+Failed to trace pwrite
+Tracing pwrite64
+Tracing pwritev
+Tracing pwritev2
+Failed to trace query_module
+Tracing quotactl
+Tracing read
+Tracing readahead
+Failed to trace readdir
+Tracing readlink
+Tracing readlinkat
+Tracing readv
+Tracing reboot
+Tracing recv
+Tracing recvfrom
+Tracing recvmsg
+Tracing recvmmsg
+Tracing remap_file_pages
+Tracing removexattr
+Tracing rename
+Tracing renameat
+Tracing renameat2
+Tracing request_key
+Tracing restart_syscall
+Failed to trace riscv_flush_icache
+Tracing rmdir
+Tracing rseq
+Tracing rt_sigaction
+Tracing rt_sigpending
+Tracing rt_sigprocmask
+Tracing rt_sigqueueinfo
+Tracing rt_sigreturn
+Tracing rt_sigsuspend
+Tracing rt_sigtimedwait
+Tracing rt_tgsigqueueinfo
+Tracing rtas
+Failed to trace s390_runtime_instr
+Tracing s390_pci_mmio_read
+Tracing s390_pci_mmio_write
+Failed to trace s390_sthyi
+Failed to trace s390_guarded_storage
+Failed to trace sched_get_affinity
+Tracing sched_get_priority_max
+Tracing sched_get_priority_min
+Tracing sched_getaffinity
+Tracing sched_getattr
+Tracing sched_getparam
+Tracing sched_getscheduler
+Tracing sched_rr_get_interval
+Failed to trace sched_set_affinity
+Tracing sched_setaffinity
+Tracing sched_setattr
+Tracing sched_setparam
+Tracing sched_setscheduler
+Tracing sched_yield
+Tracing seccomp
+Tracing select
+Tracing semctl
+Tracing semget
+Tracing semop
+Tracing semtimedop
+Tracing send
+Tracing sendfile
+Tracing sendfile64
+Tracing sendmmsg
+Tracing sendmsg
+Tracing sendto
+Tracing set_mempolicy
+Tracing set_robust_list
+Tracing set_thread_area
+Tracing set_tid_address
+Failed to trace set_tls
+Tracing setdomainname
+Tracing setfsgid
+Failed to trace setfsgid32
+Tracing setfsuid
+Failed to trace setfsuid32
+Tracing setgid
+Failed to trace setgid32
+Tracing setgroups
+Failed to trace setgroups32
+Failed to trace sethae
+Tracing sethostname
+Tracing setitimer
+Tracing setns
+Tracing setpgid
+Failed to trace setpgrp
+Tracing setpriority
+Tracing setregid
+Failed to trace setregid32
+Tracing setresgid
+Failed to trace setresgid32
+Tracing setresuid
+Failed to trace setresuid32
+Tracing setreuid
+Failed to trace setreuid32
+Tracing setrlimit
+Tracing setsid
+Tracing setsockopt
+Tracing settimeofday
+Tracing setuid
+Failed to trace setuid32
+Failed to trace setup
+Tracing setxattr
+Tracing sgetmask
+Tracing shmat
+Tracing shmctl
+Tracing shmdt
+Tracing shmget
+Tracing shutdown
+Failed to trace sigaction
+Tracing sigaltstack
+Tracing signal
+Tracing signalfd
+Tracing signalfd4
+Tracing sigpending
+Tracing sigprocmask
+Failed to trace sigreturn
+Tracing sigsuspend
+Tracing socket
+Tracing socketcall
+Tracing socketpair
+Failed to trace spill
+Tracing splice
+Tracing spu_create
+Tracing spu_run
+Failed to trace sram_alloc
+Failed to trace sram_free
+Tracing ssetmask
+Tracing stat
+Failed to trace stat64
+Tracing statfs
+Tracing statfs64
+Tracing statx
+Tracing stime
+Tracing subpage_prot
+Failed to trace switch_endian
+Failed to trace swapcontext
+Tracing swapoff
+Tracing swapon
+Tracing symlink
+Tracing symlinkat
+Tracing sync
+Tracing sync_file_range
+Tracing sync_file_range2
+Tracing syncfs
+Failed to trace sys_debug_setcontext
+Failed to trace syscall
+Tracing sysfs
+Tracing sysinfo
+Tracing syslog
+Failed to trace sysmips
+Tracing tee
+Tracing tgkill
+Tracing time
+Tracing timer_create
+Tracing timer_delete
+Tracing timer_getoverrun
+Tracing timer_gettime
+Tracing timer_settime
+Tracing timerfd_create
+Tracing timerfd_gettime
+Tracing timerfd_settime
+Tracing times
+Tracing tkill
+Tracing truncate
+Failed to trace truncate64
+Failed to trace ugetrlimit
+Tracing umask
+Tracing umount
+Failed to trace umount2
+Tracing uname
+Tracing unlink
+Tracing unlinkat
+Tracing unshare
+Tracing uselib
+Tracing ustat
+Tracing userfaultfd
+Failed to trace usr26
+Failed to trace usr32
+Tracing utime
+Tracing utimensat
+Tracing utimes
+Failed to trace utrap_install
+Tracing vfork
+Tracing vhangup
+Tracing vm86old
+Tracing vm86
+Tracing vmsplice
+Tracing wait4
+Tracing waitid
+Tracing waitpid
+Tracing write
+Tracing writev
+Failed to trace xtensa

@@ -1,6 +1,8 @@
 from bcc import BPF
+import socket
 
-pathModules="modules.c"
+pathModules="modules.c" 
+#pathModules="sampleMod.c"
 pathSyscalls="parsed.txt"
 
 def load_modules():
@@ -15,6 +17,7 @@ def load_syscalls():
 
 def main():
     logf = open("logTracer.log", "w")
+    cap = open("captures.log", "w")
     prog=load_modules()
     b = BPF(text=prog)
     syscalls=load_syscalls()
@@ -22,20 +25,32 @@ def main():
         syscall=syscall.strip()
         try: 
             b.attach_kprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
+            #b.attach_kretprobe(event=b.get_syscall_fnname(syscall), fn_name="hello")
             logf.write("Tracing "+syscall+'\n')
         except:
             logf.write("Failed to trace "+syscall+'\n')    
 
     logf.close()
+    hostname = socket.gethostname()
 
-    print("%-18s %-16s %-6s %s" % ("TIME(s)", "COMM", "PID", "MESSAGE"))
+    cap.write("%-18s %-16s %-12s %s" % ("TIME(s)", "COMM", "Namespace", "Syscall\n"))
+    print("Tracing")
     while 1:
+        
         try:
             (task, pid, cpu, flags, ts, msg) = b.trace_fields()
-        except ValueError:
+            
+        except Exception:
             continue
-        print("%-18.9f %-16s %-6d %s" % (ts, task, pid, msg))
+        msg=msg.split(':')
+        uts=msg[0]
+        syscall=msg[1]
+        if (uts!=hostname):
+            cap.write("%-18.9f %-16s %-12s %s\n" % (ts, task, uts, syscall))
+            #print("%-18.9f %-16s %-12s %s" % (ts, task, uts, syscall))
+        
+    cap.close()
+        
 
 if __name__== "__main__":
     main()
-
