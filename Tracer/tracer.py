@@ -1,5 +1,6 @@
 from bcc import BPF
 import socket
+import os
 
 pathModules="modules.c" 
 #pathModules="sampleMod.c"
@@ -31,7 +32,8 @@ def main():
             logf.write("Failed to trace "+syscall+'\n')    
 
     logf.close()
-    hostname = socket.gethostname()
+    hostnameContainer = socket.gethostname()
+    hostnameHost= os.environ['HOST_HOSTNAME']
 
     cap.write("%-18s %-16s %-12s %s" % ("TIME(s)", "COMM", "Namespace", "Syscall\n"))
     print("Tracing")
@@ -45,9 +47,9 @@ def main():
         msg=msg.split(':')
         uts=msg[0]
         syscall=msg[1]
-        if (uts!=hostname):
+        if (uts!=hostnameHost and uts!=hostnameContainer):
             cap.write("%-18.9f %-16s %-12s %s\n" % (ts, task, uts, syscall))
-            #print("%-18.9f %-16s %-12s %s" % (ts, task, uts, syscall))
+            print("%-18.9f %-16s %-12s %s" % (ts, task, uts, syscall))
         
     cap.close()
         
