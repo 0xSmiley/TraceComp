@@ -24,7 +24,7 @@ def main():
     syscalls=load_syscalls()
     for syscall in syscalls:
         syscall=syscall.strip()
-        try: 
+	try: 
             b.attach_kprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
             #b.attach_kretprobe(event=b.get_syscall_fnname(syscall), fn_name="hello")
             logf.write("Tracing "+syscall+'\n')
@@ -49,7 +49,7 @@ def main():
         syscall=msg[1]
         if (uts!=hostnameHost and uts!=hostnameContainer):
             cap.write("%-18.9f %-16s %-12s %s\n" % (ts, task, uts, syscall))
-            print("%-18.9f %-16s %-12s %s" % (ts, task, uts, syscall))
+            #print("%-18.9f %-16s %-12s %s" % (ts, task, uts, syscall))
         
     cap.close()
         
