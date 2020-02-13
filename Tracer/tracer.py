@@ -23,12 +23,12 @@ def main():
     prog=load_modules()
     b = BPF(text=prog)
     syscalls=load_syscalls()
-    syscalls=["mkdir"]
+    syscalls=["fstat","stat","lstat","getdents64"]
     for syscall in syscalls:
         syscall=syscall.strip()
         try: 
             b.attach_kprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
-            #b.attach_kretprobe(event=b.get_syscall_fnname(syscall), fn_name="hello")
+            b.attach_kretprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
             logf.write("Tracing "+syscall+'\n')
         except:
             logf.write("Failed to trace "+syscall+'\n')    

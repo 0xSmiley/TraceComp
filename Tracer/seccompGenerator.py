@@ -1,42 +1,81 @@
+import sys
+
 firstPart="""
 {
     "defaultAction": "SCMP_ACT_ERRNO",
     "syscalls": [
-"""
-secondPart="""
         {
-            "name": "$",
-            "action": "SCMP_ACT_ALLOW"
-        }"""
+            "names": [
+"""
+secondPart="""              "$" """
 thirdPart="""
+    ],
+            "action": "SCMP_ACT_ALLOW"
+        }
     ]
 }
+
 """
+syscalls={}
+fileDesc={}
+
 def EbpfMode():
-    print("Test1")
-    fd=open("CustomSeccomp.json", "w")
-    fd.write(firstPart)
-    i=0
+    
     with open('captures.log') as log:
-        print("Test2")
         line=log.readline()
         line=log.readline()
         while line:
-            print("Test3")
-            if i != 0:
-                fd.write(',\n')
             parts=line.split(';')
             syscall=parts[3].strip()
-            module=secondPart.replace('$',syscall)
-            print(syscall)
-            fd.write(module)
+            namespace=parts[2].strip()
+            values=syscalls.get(namespace, [])
+            
+            if namespace not in fileDesc:
+                fd=open(namespace+".json", "w")
+                fd.write(firstPart)
+                fileDesc[namespace]=fd
+
+            if syscall not in values:
+                fd=fileDesc[namespace]
+                if len(values) != 0:
+                    fd.write(',\n')
+                module=secondPart.replace('$',syscall)
+
+                fd.write(module)
+                syscalls.setdefault(namespace, []).append(syscall)
             line=log.readline()
-            i=i+1
     
-    fd.write(thirdPart)
+    for key in fileDesc:
+        fd=fileDesc[key]
+        fd.write(thirdPart)
+        fd.close()
     
-    fd.close()
     log.close()
     exit(0)
 
-#EbpfMode()
+def standardMode(path):
+    syscallList=[]
+    with open(path) as log:
+        line=log.readline()
+        fd=open("outputSeccomp.json", "w")
+        fd.write(firstPart)
+
+        while line:
+            syscall=line.strip()
+            if syscall not in syscallList:
+                if len(syscallList) != 0:
+                    fd.write(',\n')
+                module=secondPart.replace('$',syscall)
+                fd.write(module)
+                syscallList.append(syscall)
+            line=log.readline()
+        fd.write(thirdPart)
+        fd.close()
+        log.close()
+
+if len(sys.argv) > 1:
+    path = sys.argv[1]
+    if path != "":
+        standardMode(path)
+
+
