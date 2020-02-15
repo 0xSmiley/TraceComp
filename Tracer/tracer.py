@@ -4,8 +4,8 @@ import os
 import seccompGenerator
 
 pathModules="modules.c" 
-#pathModules="sampleMod.c"
 pathSyscalls="parsed.txt"
+
 
 def load_modules():
     with open(pathModules, "r") as f:
@@ -23,12 +23,11 @@ def main():
     prog=load_modules()
     b = BPF(text=prog)
     syscalls=load_syscalls()
-    syscalls=["fstat","stat","lstat","getdents64"]
     for syscall in syscalls:
         syscall=syscall.strip()
         try: 
             b.attach_kprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
-            b.attach_kretprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
+            #b.attach_kretprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
             logf.write("Tracing "+syscall+'\n')
         except:
             logf.write("Failed to trace "+syscall+'\n')    

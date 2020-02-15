@@ -1,4 +1,5 @@
 Syscalllpath="parsed.txt"
+#Syscalllpath="newListSyscalls.txt"
 
 header="""
 #include <uapi/linux/utsname.h>

@@ -111,6 +111,17 @@ int syscall_adjtimex(void *ctx) {
     return 0;
 }
 
+int syscall_afs_syscall(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:afs_syscall\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
 int syscall_alarm(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -243,17 +254,6 @@ int syscall_bpf(void *ctx) {
     return 0;
 }
 
-int syscall_brk(void *ctx) {
-    struct task_struct *task;
-    task = (struct task_struct *)bpf_get_current_task();
-    char * uts_name = get_task_uts_name(task);
-
-    if (uts_name){
-        bpf_trace_printk("%s:brk\n", get_task_uts_name(task));
-    }
-    return 0;
-}
-
 int syscall_breakpoint(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -261,6 +261,17 @@ int syscall_breakpoint(void *ctx) {
 
     if (uts_name){
         bpf_trace_printk("%s:breakpoint\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_brk(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:brk\n", get_task_uts_name(task));
     }
     return 0;
 }
@@ -408,17 +419,6 @@ int syscall_clock_settime(void *ctx) {
     return 0;
 }
 
-int syscall_clone2(void *ctx) {
-    struct task_struct *task;
-    task = (struct task_struct *)bpf_get_current_task();
-    char * uts_name = get_task_uts_name(task);
-
-    if (uts_name){
-        bpf_trace_printk("%s:clone2\n", get_task_uts_name(task));
-    }
-    return 0;
-}
-
 int syscall_clone(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -426,6 +426,17 @@ int syscall_clone(void *ctx) {
 
     if (uts_name){
         bpf_trace_printk("%s:clone\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_clone2(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:clone2\n", get_task_uts_name(task));
     }
     return 0;
 }
@@ -595,6 +606,17 @@ int syscall_epoll_ctl(void *ctx) {
     return 0;
 }
 
+int syscall_epoll_ctl_old(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:epoll_ctl_old\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
 int syscall_epoll_pwait(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -613,6 +635,17 @@ int syscall_epoll_wait(void *ctx) {
 
     if (uts_name){
         bpf_trace_printk("%s:epoll_wait\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_epoll_wait_old(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:epoll_wait_old\n", get_task_uts_name(task));
     }
     return 0;
 }
@@ -1332,17 +1365,6 @@ int syscall_getitimer(void *ctx) {
     return 0;
 }
 
-int syscall_getpeername(void *ctx) {
-    struct task_struct *task;
-    task = (struct task_struct *)bpf_get_current_task();
-    char * uts_name = get_task_uts_name(task);
-
-    if (uts_name){
-        bpf_trace_printk("%s:getpeername\n", get_task_uts_name(task));
-    }
-    return 0;
-}
-
 int syscall_getpagesize(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -1350,6 +1372,17 @@ int syscall_getpagesize(void *ctx) {
 
     if (uts_name){
         bpf_trace_printk("%s:getpagesize\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_getpeername(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:getpeername\n", get_task_uts_name(task));
     }
     return 0;
 }
@@ -1383,6 +1416,17 @@ int syscall_getpid(void *ctx) {
 
     if (uts_name){
         bpf_trace_printk("%s:getpid\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_getpmsg(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:getpmsg\n", get_task_uts_name(task));
     }
     return 0;
 }
@@ -2080,6 +2124,28 @@ int syscall_mbind(void *ctx) {
     return 0;
 }
 
+int syscall_membarrier(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:membarrier\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_memfd_create(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:memfd_create\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
 int syscall_memory_ordering(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -2131,28 +2197,6 @@ int syscall_metag_setglobalbit(void *ctx) {
 
     if (uts_name){
         bpf_trace_printk("%s:metag_setglobalbit\n", get_task_uts_name(task));
-    }
-    return 0;
-}
-
-int syscall_membarrier(void *ctx) {
-    struct task_struct *task;
-    task = (struct task_struct *)bpf_get_current_task();
-    char * uts_name = get_task_uts_name(task);
-
-    if (uts_name){
-        bpf_trace_printk("%s:membarrier\n", get_task_uts_name(task));
-    }
-    return 0;
-}
-
-int syscall_memfd_create(void *ctx) {
-    struct task_struct *task;
-    task = (struct task_struct *)bpf_get_current_task();
-    char * uts_name = get_task_uts_name(task);
-
-    if (uts_name){
-        bpf_trace_printk("%s:memfd_create\n", get_task_uts_name(task));
     }
     return 0;
 }
@@ -2531,6 +2575,50 @@ int syscall_newfstatat(void *ctx) {
     return 0;
 }
 
+int syscall_newstat(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:newstat\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_newfstat(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:newfstat\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_newlstat(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:newlstat\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_newuname(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:newuname\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
 int syscall_nfsservctl(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -2751,17 +2839,6 @@ int syscall_perf_event_open(void *ctx) {
     return 0;
 }
 
-int syscall_personality(void *ctx) {
-    struct task_struct *task;
-    task = (struct task_struct *)bpf_get_current_task();
-    char * uts_name = get_task_uts_name(task);
-
-    if (uts_name){
-        bpf_trace_printk("%s:personality\n", get_task_uts_name(task));
-    }
-    return 0;
-}
-
 int syscall_perfctr(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -2784,13 +2861,13 @@ int syscall_perfmonctl(void *ctx) {
     return 0;
 }
 
-int syscall_pidfd_send_signal(void *ctx) {
+int syscall_personality(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
     char * uts_name = get_task_uts_name(task);
 
     if (uts_name){
-        bpf_trace_printk("%s:pidfd_send_signal\n", get_task_uts_name(task));
+        bpf_trace_printk("%s:personality\n", get_task_uts_name(task));
     }
     return 0;
 }
@@ -2802,6 +2879,17 @@ int syscall_pidfd_open(void *ctx) {
 
     if (uts_name){
         bpf_trace_printk("%s:pidfd_open\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_pidfd_send_signal(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:pidfd_send_signal\n", get_task_uts_name(task));
     }
     return 0;
 }
@@ -3004,6 +3092,17 @@ int syscall_ptrace(void *ctx) {
     return 0;
 }
 
+int syscall_putpmsg(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:putpmsg\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
 int syscall_pwrite(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -3169,17 +3268,6 @@ int syscall_recvfrom(void *ctx) {
     return 0;
 }
 
-int syscall_recvmsg(void *ctx) {
-    struct task_struct *task;
-    task = (struct task_struct *)bpf_get_current_task();
-    char * uts_name = get_task_uts_name(task);
-
-    if (uts_name){
-        bpf_trace_printk("%s:recvmsg\n", get_task_uts_name(task));
-    }
-    return 0;
-}
-
 int syscall_recvmmsg(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -3187,6 +3275,17 @@ int syscall_recvmmsg(void *ctx) {
 
     if (uts_name){
         bpf_trace_printk("%s:recvmmsg\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_recvmsg(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:recvmsg\n", get_task_uts_name(task));
     }
     return 0;
 }
@@ -3400,13 +3499,13 @@ int syscall_rtas(void *ctx) {
     return 0;
 }
 
-int syscall_s390_runtime_instr(void *ctx) {
+int syscall_s390_guarded_storage(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
     char * uts_name = get_task_uts_name(task);
 
     if (uts_name){
-        bpf_trace_printk("%s:s390_runtime_instr\n", get_task_uts_name(task));
+        bpf_trace_printk("%s:s390_guarded_storage\n", get_task_uts_name(task));
     }
     return 0;
 }
@@ -3433,6 +3532,17 @@ int syscall_s390_pci_mmio_write(void *ctx) {
     return 0;
 }
 
+int syscall_s390_runtime_instr(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:s390_runtime_instr\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
 int syscall_s390_sthyi(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -3440,17 +3550,6 @@ int syscall_s390_sthyi(void *ctx) {
 
     if (uts_name){
         bpf_trace_printk("%s:s390_sthyi\n", get_task_uts_name(task));
-    }
-    return 0;
-}
-
-int syscall_s390_guarded_storage(void *ctx) {
-    struct task_struct *task;
-    task = (struct task_struct *)bpf_get_current_task();
-    char * uts_name = get_task_uts_name(task);
-
-    if (uts_name){
-        bpf_trace_printk("%s:s390_guarded_storage\n", get_task_uts_name(task));
     }
     return 0;
 }
@@ -3616,6 +3715,17 @@ int syscall_seccomp(void *ctx) {
 
     if (uts_name){
         bpf_trace_printk("%s:seccomp\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_security(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:security\n", get_task_uts_name(task));
     }
     return 0;
 }
@@ -4500,17 +4610,6 @@ int syscall_subpage_prot(void *ctx) {
     return 0;
 }
 
-int syscall_switch_endian(void *ctx) {
-    struct task_struct *task;
-    task = (struct task_struct *)bpf_get_current_task();
-    char * uts_name = get_task_uts_name(task);
-
-    if (uts_name){
-        bpf_trace_printk("%s:switch_endian\n", get_task_uts_name(task));
-    }
-    return 0;
-}
-
 int syscall_swapcontext(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -4540,6 +4639,17 @@ int syscall_swapon(void *ctx) {
 
     if (uts_name){
         bpf_trace_printk("%s:swapon\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_switch_endian(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:switch_endian\n", get_task_uts_name(task));
     }
     return 0;
 }
@@ -4841,6 +4951,17 @@ int syscall_truncate64(void *ctx) {
     return 0;
 }
 
+int syscall_tuxcall(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:tuxcall\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
 int syscall_ugetrlimit(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -4940,17 +5061,6 @@ int syscall_uselib(void *ctx) {
     return 0;
 }
 
-int syscall_ustat(void *ctx) {
-    struct task_struct *task;
-    task = (struct task_struct *)bpf_get_current_task();
-    char * uts_name = get_task_uts_name(task);
-
-    if (uts_name){
-        bpf_trace_printk("%s:ustat\n", get_task_uts_name(task));
-    }
-    return 0;
-}
-
 int syscall_userfaultfd(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -4980,6 +5090,17 @@ int syscall_usr32(void *ctx) {
 
     if (uts_name){
         bpf_trace_printk("%s:usr32\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_ustat(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:ustat\n", get_task_uts_name(task));
     }
     return 0;
 }
@@ -5050,17 +5171,6 @@ int syscall_vhangup(void *ctx) {
     return 0;
 }
 
-int syscall_vm86old(void *ctx) {
-    struct task_struct *task;
-    task = (struct task_struct *)bpf_get_current_task();
-    char * uts_name = get_task_uts_name(task);
-
-    if (uts_name){
-        bpf_trace_printk("%s:vm86old\n", get_task_uts_name(task));
-    }
-    return 0;
-}
-
 int syscall_vm86(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -5072,6 +5182,17 @@ int syscall_vm86(void *ctx) {
     return 0;
 }
 
+int syscall_vm86old(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:vm86old\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
 int syscall_vmsplice(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -5079,6 +5200,17 @@ int syscall_vmsplice(void *ctx) {
 
     if (uts_name){
         bpf_trace_printk("%s:vmsplice\n", get_task_uts_name(task));
+    }
+    return 0;
+}
+
+int syscall_vserver(void *ctx) {
+    struct task_struct *task;
+    task = (struct task_struct *)bpf_get_current_task();
+    char * uts_name = get_task_uts_name(task);
+
+    if (uts_name){
+        bpf_trace_printk("%s:vserver\n", get_task_uts_name(task));
     }
     return 0;
 }
