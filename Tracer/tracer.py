@@ -19,7 +19,6 @@ def load_syscalls():
 
 def main():
     logf = open("logTracer.log", "w")
-    cap = open("captures.log", "w")
     prog=load_modules()
     b = BPF(text=prog)
     syscalls=load_syscalls()
@@ -35,8 +34,10 @@ def main():
     logf.close()
     hostnameContainer = socket.gethostname()
     hostnameHost= os.environ['HOST_HOSTNAME']
-
-    cap.write("%s;%s;%s;%s" % ("TIME(s)", "COMM", "Namespace", "Syscall\n"))
+    
+    
+    
+    fileDesc={}
     print("Tracing")
     while 1:
         
@@ -44,8 +45,7 @@ def main():
             (task, pid, cpu, flags, ts, msg) = b.trace_fields()
         
         except KeyboardInterrupt:
-            cap.close()
-            seccompGenerator.EbpfMode()
+            exit()
         
         except Exception:
             continue
@@ -53,11 +53,20 @@ def main():
         msg=msg.split(':')
         uts=msg[0]
         syscall=msg[1]
-        if (uts!=hostnameHost and uts!=hostnameContainer):
-            cap.write("%f;%s;%s;%s\n" % (ts, task, uts, syscall))
-            #print("%f;%s;%s;%s" % (ts, task, uts, syscall))
         
-    cap.close()
+        if (uts!=hostnameHost and uts!=hostnameContainer):
+            if uts not in fileDesc:
+                fd = open(uts+".cap", "w")
+                fd.write("%s;%s;%s;%s" % ("TIME(s)", "COMM", "Namespace", "Syscall\n"))
+                fileDesc[uts] = fd
+            else:
+                fd=fileDesc[uts]
+            fd.write("%f;%s;%s;%s\n" % (ts, task, uts, syscall))
+            #print("%f;%s;%s;%s" % (ts, task, uts, syscall))
+            if syscall=="exit_group":
+                fd.close()
+                seccompGenerator.EbpfMode(uts)
+                print("Container: "+uts+" traced")
         
 
 if __name__== "__main__":

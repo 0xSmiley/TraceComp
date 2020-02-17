@@ -17,7 +17,7 @@ def main():
     cap = open("captures.log", "w")
     prog=load_modules()
     b = BPF(text=prog)
-    syscalls=["newlstat"]
+    syscalls=["exit_group"]
     for syscall in syscalls:
         syscall=syscall.strip()
         try: 
@@ -25,7 +25,7 @@ def main():
                 print(syscall)
             #print(b.get_syscall_fnname(syscall))
             b.attach_kprobe(event=b.get_syscall_fnname(syscall), fn_name="hello")
-            b.attach_kretprobe(event=b.get_syscall_fnname(syscall), fn_name="hello2")
+            #b.attach_kretprobe(event=b.get_syscall_fnname(syscall), fn_name="hello2")
             logf.write("Tracing "+syscall+'\n')
         except:
             logf.write("Failed to trace "+syscall+'\n')    
@@ -53,7 +53,7 @@ def main():
         syscall=msg[1]
         if (uts!=hostnameHost and uts!=hostnameContainer):
             cap.write("%f;%s;%s;%s\n" % (ts, task, uts, syscall))
-            #print("%f;%s;%s;%s" % (ts, task, uts, syscall))
+            print("%f;%s;%s;%s" % (ts, task, uts, syscall))
         
     cap.close()
         

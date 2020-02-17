@@ -16,42 +16,33 @@ thirdPart="""
 }
 
 """
-syscalls={}
-fileDesc={}
+syscalls=[]
 
-def EbpfMode():
+def EbpfMode(uts):
+
+    fd=open(uts+".json", "w")
+    fd.write(firstPart)
     
-    with open('captures.log') as log:
+    with open(uts+'.cap') as log:
         line=log.readline()
         line=log.readline()
         while line:
             parts=line.split(';')
             syscall=parts[3].strip()
-            namespace=parts[2].strip()
-            values=syscalls.get(namespace, [])
             
-            if namespace not in fileDesc:
-                fd=open(namespace+".json", "w")
-                fd.write(firstPart)
-                fileDesc[namespace]=fd
-
-            if syscall not in values:
-                fd=fileDesc[namespace]
-                if len(values) != 0:
+            if syscall not in syscalls:
+                if len(syscalls) != 0:
                     fd.write(',\n')
                 module=secondPart.replace('$',syscall)
-
                 fd.write(module)
-                syscalls.setdefault(namespace, []).append(syscall)
+                syscalls.append(syscall)
+
             line=log.readline()
-    
-    for key in fileDesc:
-        fd=fileDesc[key]
-        fd.write(thirdPart)
-        fd.close()
-    
+
+    fd.write(thirdPart)
+    fd.close()
     log.close()
-    exit(0)
+
 
 def standardMode(path):
     syscallList=[]
