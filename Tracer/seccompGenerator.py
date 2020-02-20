@@ -33,6 +33,27 @@ def EbpfMode(uts):
             if syscall not in syscalls:
                 if len(syscalls) != 0:
                     fd.write(',\n')
+                if syscall == "newuname":
+                    newModule=secondPart.replace('$',"uname")
+                    fd.write(newModule)
+                    fd.write(',\n')
+                elif syscall == "newstat":
+                    newModule=secondPart.replace('$',"stat")
+                    fd.write(newModule)
+                    fd.write(',\n')
+                elif syscall == "newfstatat":
+                    newModule=secondPart.replace('$',"fstatat")
+                    fd.write(newModule)
+                    fd.write(',\n')
+                elif syscall == "newfstat":
+                    newModule=secondPart.replace('$',"fstat")
+                    fd.write(newModule)
+                    fd.write(',\n')
+                elif syscall == "newlstat":
+                    newModule=secondPart.replace('$',"lstat")
+                    fd.write(newModule)
+                    fd.write(',\n')
+
                 module=secondPart.replace('$',syscall)
                 fd.write(module)
                 syscalls.append(syscall)
