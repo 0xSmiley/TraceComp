@@ -2,6 +2,7 @@ from bcc import BPF
 import socket
 import os
 import seccompGenerator
+import time
 
 pathModules="modules.c" 
 pathSyscalls="parsed.txt"
@@ -35,8 +36,6 @@ def main():
     hostnameContainer = socket.gethostname()
     hostnameHost= os.environ['HOST_HOSTNAME']
     
-    
-    
     fileDesc={}
     print("Tracing")
     while 1:
@@ -49,7 +48,7 @@ def main():
         
         except Exception:
             continue
-        
+        msg=msg.decode("utf-8") 
         msg=msg.split(':')
         uts=msg[0]
         syscall=msg[1]
@@ -61,12 +60,18 @@ def main():
                 fileDesc[uts] = fd
             else:
                 fd=fileDesc[uts]
+
             fd.write("%f;%s;%s;%s\n" % (ts, task, uts, syscall))
             #print("%f;%s;%s;%s" % (ts, task, uts, syscall))
             if syscall=="exit_group":
-                fd.close()
-                seccompGenerator.EbpfMode(uts)
-                print("Container: "+uts+" traced")
+                time.sleep(1)
+                stream=os.popen('docker inspect -f {{.State.Running}} '+uts)
+                containerCheck = stream.read().strip()
+                if containerCheck =='false':
+                    fd.close()
+                    seccompGenerator.EbpfMode(uts)
+                    print("Container: "+uts+" traced")
+                print(containerCheck)
         
 
 if __name__== "__main__":

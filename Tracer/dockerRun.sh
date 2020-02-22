@@ -1,9 +1,11 @@
 docker run -it --rm \
   --privileged \
-  -v /lib/modules:/lib/modules:ro \
-  -v /usr/src:/usr/src:ro \
-  -v /etc/localtime:/etc/localtime:ro \
+  -v /lib/modules:/lib/modules \
+  -v /usr/src:/usr/src \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /etc/localtime:/etc/localtime \
+  -v /sys/kernel/debug:/sys/kernel/debug \
   -v /home/ubuntu/Desktop/Share/Runtime/Tracer:/tracer \
   -e HOST_HOSTNAME=`hostname` \
-  --workdir /usr/share/bcc/tools \
-  zlim/bcc
+  --workdir /tracer \
+  nunolopes97/container_trace
