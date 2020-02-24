@@ -5,11 +5,15 @@ import seccompGenerator
 import time
 import docker
 from threading import Timer
+import ctypes as ct
 
 
 pathModules="modules.c" 
 pathSyscalls="parsed.txt"
 fileDesc={}
+hostnameContainer = socket.gethostname()
+hostnameHost= os.environ['HOST_HOSTNAME']
+client = docker.from_env()
 
 def load_modules():
     with open(pathModules, "r") as f:
@@ -20,6 +24,13 @@ def load_syscalls():
     with open(pathSyscalls, "r") as f:
         syscalls = f.readlines()
     return syscalls
+
+class Data(ct.Structure):
+    _fields_ = [
+      ('uts', ct.c_char * 50), 
+      ('syscall', ct.c_char * 30), 
+    ]
+
 
 
 def main():
@@ -34,69 +45,55 @@ def main():
             #b.attach_kretprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
             logf.write("Tracing "+syscall+'\n')
         except:
-            logf.write("Failed to trace "+syscall+'\n')    
+            logf.write("Failed to trace "+syscall+'\n')   
+
 
     logf.close()
-    hostnameContainer = socket.gethostname()
-    hostnameHost= os.environ['HOST_HOSTNAME']
     
-    
-    client = docker.from_env()
-    containerList=client.containers.list()
+    b['data_event'].open_perf_buffer(traceEvent)
     print("Tracing")
-    
-    while 1:
-        
+    while True:
         try:
-            (task, pid, cpu, flags, ts, msg) = b.trace_fields()
-        
+            # Poll the data structure till Ctrl+C
+            b.perf_buffer_poll()
         except KeyboardInterrupt:
+            print('Bye !')
             exit()
-        
-        
-        msg=msg.decode("utf-8") 
-        task=task.decode("utf-8")
-        msg=msg.split(':')
-        uts=msg[0]
-        syscall=msg[1]
-        
-        if (uts!=hostnameHost and uts!=hostnameContainer):
-            if uts not in fileDesc:
-                fd = open("Captures/"+uts+".cap", "w")
-                fd.write("%s;%s;%s;%s" % ("TIME(s)", "COMM", "NAMESPACE", "SYSCALL\n"))
-                fileDesc[uts] = fd
-            else:
-                fd=fileDesc[uts]
-            try:
-                fd.write("%f;%s;%s;%s\n" % (ts, task, uts, syscall))
-                #print("%f;%s;%s;%s" % (ts, task, uts, syscall))
-            except Exception:
-                print("Error on "+uts+ " "+ task+ " "+syscall)
 
-            currentContainerList=client.containers.list()
-            if len(containerList)<len(currentContainerList):
-                containerList=currentContainerList
-                #print(containerList)
-            elif len(containerList)>len(currentContainerList):
-                #print(containerList,currentContainerList)
-                t=Timer(10,stopTraceInit,[containerList,currentContainerList])
-                #t = threading.Thread(target=stopTraceInit, args=[containerList,currentContainerList])
-                t.start()
-                containerList=currentContainerList
 
-def stopTraceInit(containerList,currentContainerList):
-    currentContainerList=set(currentContainerList)
-    diff = [x for x in containerList if x not in currentContainerList]
-
-    for container in diff:
-        fullUts=container.id
-        uts=fullUts[:12]
-        fd=fileDesc[uts]
-        seccompGenerator.EbpfMode(uts)
-        fd.close()
-        print("Traced "+uts)
-
+def traceEvent(cpu, data, size):
+    data = ct.cast(data, ct.POINTER(Data)).contents
+    uts=data.uts.decode("utf-8")
+    syscall=data.syscall.decode("utf-8")
+    
+    
+    if (uts!=hostnameHost and uts!=hostnameContainer):
         
+        if uts not in fileDesc:
+            fd = open("Captures/"+uts+".cap", "w")
+            fd.write("%s;%s" % ("NAMESPACE", "SYSCALL\n"))
+            fileDesc[uts] = fd
+        else:
+            fd=fileDesc[uts]
+        try:
+            fd.write("%s;%s\n" % (uts, syscall))
+            #print("%s;%s\n" % (uts, syscall))
+        except Exception:
+            seccompGenerator.EbpfMode(uts)
+            fd.close()
+            print("Error on "+uts + "  " + syscall)
+    
+        """container = client.containers.get(uts)
+        containerCheck=container.status.strip()
+        if containerCheck=="exited":
+            t=Timer(10,stopTrace,[uts,fd])
+            t.start()"""
+
+def stopTrace(uts,fd):
+    seccompGenerator.EbpfMode(uts)
+    fd.close()
+    print("Traced "+uts)
+
 
 if __name__== "__main__":
     main()

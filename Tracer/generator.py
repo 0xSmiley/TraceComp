@@ -2,6 +2,7 @@ Syscalllpath="parsed.txt"
 #Syscalllpath="newListSyscalls.txt"
 
 header="""
+
 #include <uapi/linux/utsname.h>
 #include <linux/pid_namespace.h>
 
@@ -10,9 +11,17 @@ struct uts_namespace {
     struct new_utsname name;
 };
 
+struct data_t {
+    char uts[50];
+    char syscall[30];
+    
+};
+BPF_PERF_OUTPUT(data_event);
+
 static __always_inline char * get_task_uts_name(struct task_struct *task){
     return task->nsproxy->uts_ns->name.nodename;
 }
+
 
 """
 
@@ -21,9 +30,13 @@ int syscall_$(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
     char * uts_name = get_task_uts_name(task);
-
-    if (uts_name){
-        bpf_trace_printk("%s:$\\n", get_task_uts_name(task));
+    
+    if(uts_name){
+        bpf_trace_printk("Aqui %s",uts_name);
+        struct data_t data = {};
+        bpf_probe_read_str(&data.uts, 50, get_task_uts_name(task));
+        strcpy(data.syscall, "$");
+        data_event.perf_submit(ctx, &data, sizeof(data));
     }
     return 0;
 }

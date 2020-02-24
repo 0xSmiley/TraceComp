@@ -11,6 +11,8 @@ static __always_inline char * get_task_uts_name(struct task_struct *task)
     return task->nsproxy->uts_ns->name.nodename;
 }
 
+BPF_HASH(syscalls)
+
 int hello(void *ctx) {
     struct task_struct *task;
     task = (struct task_struct *)bpf_get_current_task();
@@ -19,7 +21,11 @@ int hello(void *ctx) {
     if (uts_name){
         bpf_trace_printk("%s:OHH ENTRY!\n", get_task_uts_name(task));
     }
+    u64 a =0;
+    u64 b =0;
+    syscalls.update(&a,&b);
     return 0;
+
 }
 int hello2(void *ctx) {
     struct task_struct *task;
