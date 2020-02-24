@@ -20,10 +20,10 @@ syscalls=[]
 
 def EbpfMode(uts):
 
-    fd=open(uts+".json", "w")
+    fd=open("Captures/"+uts+".json", "w")
     fd.write(firstPart)
     
-    with open(uts+'.cap') as log:
+    with open("Captures/"+uts+'.cap') as log:
         line=log.readline()
         line=log.readline()
         while line:

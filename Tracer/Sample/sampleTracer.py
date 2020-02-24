@@ -1,14 +1,14 @@
 
-import os
 
-stream=os.popen('docker inspect -f {{.State.Running}} cf0fa9500b67')
-a = stream.read().strip()
-if a=="true" :
-  print("Running ",a)
-else:
-  print("Not Running ",a)
+from bcc import BPF
 
-stream = os.popen('echo Returned output')
-output = stream.read()
-  
-
+text="""
+int hello(void *ctx) {
+  bpf_trace_printk("Hello, World!\\n");
+  return 0;
+}
+"""
+b = BPF(text=text)
+print(b.get_syscall_fnname("clone"))
+b.attach_kprobe(event="__x64_sys_clone", fn_name="hello")
+b.trace_print()
