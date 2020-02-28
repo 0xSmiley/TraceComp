@@ -1,0 +1,12 @@
+{
+    "fuzz-url": [
+        {
+            "container": "nunolopes97/dirsearch",
+            "command": "-u https://owasp.org -e *"
+        },
+        {
+            "container": "hypnza/sublist3r",
+            "command": "-d owasp.org"
+        }
+    ]
+}
