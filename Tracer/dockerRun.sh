@@ -9,4 +9,4 @@ docker run -it --rm \
   -e HOST_HOSTNAME=`hostname` \
   --workdir /tracer \
   --network="host" \
-  test
+  nunolopes97/container_trace
