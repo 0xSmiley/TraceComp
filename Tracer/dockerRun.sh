@@ -8,4 +8,5 @@ docker run -it --rm \
   -v /home/ubuntu/Desktop/Share/Runtime/Tracer:/tracer \
   -e HOST_HOSTNAME=`hostname` \
   --workdir /tracer \
-  nunolopes97/container_trace
+  --network="host" \
+  test

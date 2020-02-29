@@ -1,0 +1,13 @@
+
+{
+    "defaultAction": "SCMP_ACT_ERRNO",
+    "syscalls": [
+        {
+            "names": [
+
+    ],
+            "action": "SCMP_ACT_ALLOW"
+        }
+    ]
+}
+

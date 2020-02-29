@@ -1,0 +1,62 @@
+
+{
+    "defaultAction": "SCMP_ACT_ERRNO",
+    "syscalls": [
+        {
+            "names": [
+              "openat" ,
+              "epoll_ctl" ,
+              "write" ,
+              "close" ,
+              "mount" ,
+              "prctl" ,
+              "read" ,
+              "nanosleep" ,
+              "gettid" ,
+              "epoll_pwait" ,
+              "futex" ,
+              "seccomp" ,
+              "sched_yield" ,
+              "brk" ,
+              "getdents64" ,
+              "fstatat" ,
+              "newfstatat" ,
+              "fcntl" ,
+              "capget" ,
+              "fstat" ,
+              "newfstat" ,
+              "fchown" ,
+              "setgroups" ,
+              "setgid" ,
+              "setuid" ,
+              "capset" ,
+              "chdir" ,
+              "getppid" ,
+              "execve" ,
+              "arch_prctl" ,
+              "set_tid_address" ,
+              "mprotect" ,
+              "getuid" ,
+              "getpid" ,
+              "rt_sigprocmask" ,
+              "rt_sigaction" ,
+              "getcwd" ,
+              "ioctl" ,
+              "open" ,
+              "getpgid" ,
+              "setpgid" ,
+              "wait4" ,
+              "stat" ,
+              "newstat" ,
+              "geteuid" ,
+              "lseek" ,
+              "poll" ,
+              "writev" ,
+              "rt_sigreturn" ,
+              "exit_group" 
+    ],
+            "action": "SCMP_ACT_ALLOW"
+        }
+    ]
+}
+

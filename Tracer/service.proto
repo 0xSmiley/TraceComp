@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message Uts {
+    string uts = 1;
+}
+message Cofirmation {
+    int32 confirm = 1;
+}
+
+service Comunication {
+    rpc AddUuts(Uts) returns (Cofirmation) {}
+    rpc RemoveUts(Uts) returns (Cofirmation) {}
+}

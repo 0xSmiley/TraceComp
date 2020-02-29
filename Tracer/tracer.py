@@ -3,7 +3,12 @@ import socket
 import os
 import seccompGenerator
 import time
-from threading import Timer
+import threading
+import grpc
+from concurrent import futures
+
+import service_pb2
+import service_pb2_grpc
 
 
 pathModules="modules.c" 
@@ -20,8 +25,26 @@ def load_syscalls():
         syscalls = f.readlines()
     return syscalls
 
+def sendMessage(channel,utsMessage):
+
+    stub = service_pb2_grpc.ComunicationStub(channel)
+    message = service_pb2.Uts(uts=utsMessage)
+    response = stub.AddUuts(message)
+
+    if response.confirm == 1:
+        fdTmp=fileDesc[utsMessage]
+        fdTmp.close()
+        seccompGenerator.EbpfMode(utsMessage)
+        print("Traced "+utsMessage)
+    else:
+        print("Error on gRPC ")
+    
 
 def main():
+
+    # open a gRPC channel
+    channel = grpc.insecure_channel('localhost:50051')
+
     logf = open("logTracer.log", "w")
     prog=load_modules()
     b = BPF(text=prog)
@@ -33,8 +56,8 @@ def main():
             #b.attach_kretprobe(event=b.get_syscall_fnname(syscall), fn_name="syscall_"+syscall)
             logf.write("Tracing "+syscall+'\n')
         except:
-            logf.write("Failed to trace "+syscall+'\n')    
-
+            logf.write("Failed to trace "+syscall+'\n')   
+    
     logf.close()
     hostnameContainer = socket.gethostname()
     hostnameHost= os.environ['HOST_HOSTNAME']
@@ -47,13 +70,8 @@ def main():
             (task, pid, cpu, flags, ts, msg) = b.trace_fields()
         
         except KeyboardInterrupt:
-            for utsTmp in fileDesc:
-                fdTmp=fileDesc[utsTmp]
-                fdTmp.close()
-                seccompGenerator.EbpfMode(utsTmp)
-                print("Traced "+utsTmp)
-            break
-        
+            print("Exit")
+            exit(0)
         
         msg=msg.decode("utf-8") 
         task=task.decode("utf-8")
@@ -66,6 +84,8 @@ def main():
                 fd = open("Captures/"+uts+".cap", "w")
                 fd.write("%s;%s;%s;%s" % ("TIME(s)", "COMM", "NAMESPACE", "SYSCALL\n"))
                 fileDesc[uts] = fd
+                x = threading.Thread(target=sendMessage, args=([channel,uts]))
+                x.start()
             else:
                 fd=fileDesc[uts]
             try:

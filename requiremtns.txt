@@ -1,0 +1,3 @@
+pip3 install docker
+pip3 install grpcio
+pip3 install grpcio-tools

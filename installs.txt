@@ -1,0 +1,28 @@
+docker run -it --rm \
+  --privileged \
+  -v /lib/modules:/lib/modules \
+  -v /usr/src:/usr/src \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /etc/localtime:/etc/localtime \
+  -v /sys/kernel/debug:/sys/kernel/debug \
+  -v /home/ubuntu/Desktop/Share/Runtime/Tracer:/tracer \
+  -e HOST_HOSTNAME=`hostname` \
+  --workdir /tracer \
+  ubuntu
+  bcc
+
+apt update
+apt install gnupg
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4052245BD4284CDD
+apt-get install lsb-core
+echo "deb https://repo.iovisor.org/apt/$(lsb_release -cs) $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/iovisor.list
+apt update
+apt install bcc-tools libbcc-examples linux-headers-$(uname -r) python3-bcc
+
+apt-get -y install python3-pip
+
+Radamsa
+ $ # please please please fuzz your programs. here is one way to get data for it:
+ $ sudo apt-get install gcc make git wget
+ $ git clone https://gitlab.com/akihe/radamsa.git && cd radamsa && make && sudo make install
+ $ echo "HAL 9000" | radamsa
