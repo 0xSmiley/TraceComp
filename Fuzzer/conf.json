@@ -2,7 +2,8 @@
     "fuzz-url": [
         {
             "container": "nunolopes97/dirsearch",
-            "command": "-u https://owasp.org -e *"
+            "command": "-u https://owasp.org -e *",
+            "inputs": "/Users/nunolopes/Desktop/Runtime/Fuzzer/Radamsa/Inputs/inputs.txt"
         },
         {
             "container": "hypnza/sublist3r",
