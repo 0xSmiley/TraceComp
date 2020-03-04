@@ -1,5 +1,5 @@
 {
-    "fuzz-url": [
+    "fuzz": [
         {
             "container": "nunolopes97/dirsearch",
             "command": "-u https://owasp.org -e *",

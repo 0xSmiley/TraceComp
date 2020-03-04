@@ -6,7 +6,7 @@ client = docker.from_env()
 
 with open('conf.json') as json_file:
     data = json.load(json_file)
-    for line in data['fuzz-url']:
+    for line in data['fuzz']:
         container=line['container']
         args=line['command']
         if 'inputs' in line:
@@ -16,8 +16,9 @@ with open('conf.json') as json_file:
             res = '/'.join(temp[:len(temp)-1]), '/'.join(temp[len(temp)-1:])
             path=res[0]
             mutateFile=res[1]
+            os.system('docker run --rm -v '+path+':/Inputs nunolopes97/radamsa -r /Inputs/'+mutateFile+' -n 10 -o /Inputs/Fuzz/out%n.txt')
 
-            os.system('docker run --rm -v '+path+':/Inputs nunolopes97/radamsa -r /Inputs/'+mutateFile+' -n 10 -o /Inputs/out%n.txt')
-        #os.system("docker run --rm "+ container+" "+ args)
+        else:
+            os.system("docker run --rm "+ container+" "+ args)
         
         
