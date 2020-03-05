@@ -26,3 +26,12 @@ Radamsa
  $ sudo apt-get install gcc make git wget
  $ git clone https://gitlab.com/akihe/radamsa.git && cd radamsa && make && sudo make install
  $ echo "HAL 9000" | radamsa
+
+Gitlab install
+curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash
+sudo apt update
+sudo apt-get install gitlab-runner
+
+Gitlab Setup
+
+
