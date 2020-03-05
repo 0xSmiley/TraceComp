@@ -34,4 +34,13 @@ sudo apt-get install gitlab-runner
 
 Gitlab Setup
 
+sudo gitlab-runner register -n \
+  --url https://gitlab.com/ \
+  --registration-token REGISTRATION_TOKEN \
+  --executor shell \
+  --description "My Runner"
+
+sudo usermod -aG docker gitlab-runner
+sudo -u gitlab-runner -H docker info => Verify that gitlab-runner has access to Docker
+
 

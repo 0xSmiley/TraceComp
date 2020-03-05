@@ -20,5 +20,3 @@ with open('conf.json') as json_file:
 
         else:
             os.system("docker run --rm "+ container+" "+ args)
-        
-        
