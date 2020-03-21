@@ -1,0 +1,22 @@
+ 20 Março
+
+Fuzzer!
+
+Focar em como fazer fuzzer ao apache
+
+Start apache docker:
+	sudo docker run -p 8080:80 httpd
+
+
+sudo docker run --rm -v /home/ubuntu/skipfish:/work --network=host k0st/alpine-skipfish -S /opt/skipfish/dictionaries/medium.wl -o /work/skip.out http://localhost:8080/
+
+sudo docker run --network=host nunolopes97/nikto -h http://localhost:8080/
+
+sudo docker run --network=host -t owasp/zap2docker-weekly zap-baseline.py -t http://localhost:8080/
+
+https://www.cse.msstate.edu/wp-content/uploads/2020/02/j5.pdf
+
+docker run -ti --security-opt seccomp=./0f0c5a086c4f.json alpine sh
+
+Show fuzzer:
+go run intruder.go -u http://localhost:8080 -w ./wordlist/ApacheFuzz.txt
