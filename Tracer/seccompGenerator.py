@@ -16,10 +16,10 @@ thirdPart="""
 }
 
 """
-syscalls=[]
+
 
 def EbpfMode(uts):
-
+    syscalls=[]
     fd=open("Captures/"+uts+".json", "w")
     fd.write(firstPart)
     
@@ -29,7 +29,6 @@ def EbpfMode(uts):
         while line:
             parts=line.split(';')
             syscall=parts[3].strip()
-            
             if syscall not in syscalls:
                 if len(syscalls) != 0:
                     fd.write(',\n')
