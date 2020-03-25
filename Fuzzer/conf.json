@@ -1,13 +1,14 @@
 {
     "fuzz": [
         {
-            "container": "nunolopes97/dirsearch",
-            "command": "-u https://owasp.org -e *",
-            "inputs": "/Users/nunolopes/Desktop/Runtime/Fuzzer/Radamsa/Inputs/inputs.txt"
+            "container": "nunolopes97/nikto",
+            "command": "-h http://localhost:8080/"
         },
         {
-            "container": "hypnza/sublist3r",
-            "command": "-d owasp.org"
+            "container":"nunolopes97/socketclient",
+            "command":"python3 client.py localhost 8081 wordlist.txt",
+            "mounthost": "/home/ubuntu/Desktop/Share/Runtime/Fuzzer/Socket/Client",
+            "mountContainer": "/app"
         }
     ]
 }
