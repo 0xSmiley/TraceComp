@@ -3,6 +3,23 @@ import json
 import colorama
 import re
 
+firstPart="""
+{
+    "defaultAction": "SCMP_ACT_ERRNO",
+    "syscalls": [
+        {
+            "names": [
+"""
+secondPart="""              "$" """
+thirdPart="""
+    ],
+            "action": "SCMP_ACT_ALLOW"
+        }
+    ]
+}
+
+"""
+
 def main():
 
     parser = argparse.ArgumentParser(description='Tool to check vulnerable syscall in seccomp profile')
@@ -45,18 +62,30 @@ def main():
     
     if args.all is not None:
         try:
-            with open(args.all, "r") as f:
-                lines = f.readlines()
+            with open(args.all) as json_file:
+                data = json.load(json_file)
+                for line in data['syscalls']:
+                    for sys in line['names']:
+                        All.append(sys)
         except:
             print("Error on -all file")
 
         with open("newProfile.json","w") as f:
-            for line in lines:
-                tmp=re.findall(r"(?i)\b[a-z]+\b", line.strip())
+            f.write(firstPart)
+            for syscall in All:
+
+                tmp=syscall.strip()
+                clean="".join(tmp).replace(',','')
                 
-                if "".join(tmp) not in VulnSyscalls:
-                    f.write(line) 
+                if clean not in VulnSyscalls :
                     
+                    newModule=secondPart.replace('$',clean)
+                    f.write(newModule)
+                    if syscall != All[len(All)-1]:
+                        f.write(',\n')
+        
+            f.write(thirdPart)
+            f.close()
         print(colorama.Fore.GREEN + "A new profile has been generated")
 
 if __name__== "__main__":

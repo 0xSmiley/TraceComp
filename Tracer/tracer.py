@@ -41,7 +41,6 @@ def sendMessage(channel,utsMessage):
     
 
 def main():
-    # open a gRPC channel
     channel = grpc.insecure_channel('localhost:50051')
 
     logf = open("logTracer.log", "w")
