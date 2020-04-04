@@ -9,5 +9,4 @@ message Cofirmation {
 
 service Comunication {
     rpc AddUuts(Uts) returns (Cofirmation) {}
-    rpc RemoveUts(Uts) returns (Cofirmation) {}
 }
