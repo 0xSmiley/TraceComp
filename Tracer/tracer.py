@@ -26,19 +26,24 @@ def load_syscalls():
     return syscalls
 
 def sendMessage(channel,utsMessage):
-
     stub = service_pb2_grpc.ComunicationStub(channel)
     message = service_pb2.Uts(uts=utsMessage)
-    response = stub.AddUuts(message)
-
-    if response.confirm == 1:
-        fdTmp=fileDesc[utsMessage]
-        fdTmp.close()
-        seccompGenerator.EbpfMode(utsMessage)
-        print("Traced "+utsMessage)
-    else:
-        print("Error on gRPC ")
+    response=""
+    try:
+        response = stub.AddUuts(message)
+        #print(response)
+        if response.confirm == 1:
+            fdTmp=fileDesc[utsMessage]
+            fdTmp.close()
+            seccompGenerator.EbpfMode(utsMessage)
+            print("Traced "+utsMessage)
+        else:
+            print("Error on gRPC ")
     
+    except:
+        print("ERROR " + response+" done")
+
+
 
 def main():
     channel = grpc.insecure_channel('localhost:50051')

@@ -21,7 +21,7 @@ class ComunicationServicer(service_pb2_grpc.ComunicationServicer):
     # calculator_pb2.Number
     def AddUuts(self, request, context):
         response = service_pb2.Cofirmation()
-        print("Waiting for "+request.uts+ "to exit")
+        print("Waiting for "+request.uts+ " to exit")
 
         container = client.containers.get(request.uts)
         containerCheck=container.status.strip()
@@ -29,8 +29,11 @@ class ComunicationServicer(service_pb2_grpc.ComunicationServicer):
             sleep(1)
             container = client.containers.get(request.uts)
             containerCheck=container.status.strip()
-        
-        response.confirm = 1
+            #print(containerCheck)
+        try:
+            response.confirm = 1
+        except:
+            print("Error on gRPC.\n\tPlease don't use flag -rm on the container to be traced.")
         return response
 
 
