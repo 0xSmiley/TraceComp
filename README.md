@@ -9,6 +9,6 @@ Dizer requirements
 
 PoCs:
 
-[PhpMail](https://https://github.com/0xSmiley/Runtime/blob/master/PoC/PhpMail/README.md)
-[Nginx](https://https://github.com/0xSmiley/Runtime/blob/master/PoC/Nginx/README.md)
-[Apache](https://https://github.com/0xSmiley/Runtime/blob/master/PoC/ApacheTomcat/README.md)
+[PhpMail](https://github.com/0xSmiley/Runtime/blob/master/PoC/PhpMail/README.md)
+[Nginx](https://github.com/0xSmiley/Runtime/blob/master/PoC/Nginx/README.md)
+[Apache](https://github.com/0xSmiley/Runtime/blob/master/PoC/ApacheTomcat/README.md)
