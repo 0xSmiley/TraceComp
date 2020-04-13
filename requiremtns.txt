@@ -1,4 +1,0 @@
-pip3 install docker
-pip3 install grpcio
-pip3 install grpcio-tools
-pip3 install argparse
