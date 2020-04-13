@@ -14,6 +14,8 @@ Wait until you the program outputs the word ``` Tracing ```. Now any newly spawn
 Each line in the .cap file consists of: the time on which the syscall was called, the process that called the syscall, the namespace of the syscall and finally the syscall itself. 
 
 The .json file consists of a Seccomp Profile whitelisting all the captured syscalls from the .cap file.
+
+The logTracer.log file has information about what syscalls are being captured.
   
 # Deploy a custom Seccomp Profile
 ``` sudo docker run --security-opt seccomp=./Path-to-profile <container> ```
