@@ -27,7 +27,8 @@ Vulnerable syscalls:
 
 If you have a vulnerable Seccomp profile you can supply it to the program and the vulnerable syscalls will be removed. Even though this might mitigate the vulnerability should be a temporary fix and done only as a last resource since it might break some funcionality in the application.
 * Using the flag -all supply the path your current Seccomp profile.
+* A new profile will be generated without the vulnerable syscalls.
 
 ``` 
-python3 mit.py -poc poc.json -useC usecase.json -all all.json 
+python3 mit.py -poc poc.json -useC usecase.json -all fuzzed.json
 ```
