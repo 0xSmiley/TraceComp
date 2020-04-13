@@ -19,3 +19,8 @@ The logTracer.log file has information about what syscalls are being captured.
   
 # Deploy a custom Seccomp Profile
 ``` sudo docker run --security-opt seccomp=./Path-to-profile <container> ```
+
+# CI/CD Integration
+In order to easilly mantain the Seccomp profiles you can integrate this solution with the CI/CD pipeline. Just make sure that you have the tracing solution running and when the unit test run they will do so in a container.
+
+Having good unit tests that map all the funcionalities needed are crucial for a reliable profile.
