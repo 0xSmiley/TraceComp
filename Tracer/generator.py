@@ -1,4 +1,4 @@
-Syscalllpath="parsed.txt"
+Syscalllpath="syscalls.txt"
 #Syscalllpath="newListSyscalls.txt"
 
 header="""

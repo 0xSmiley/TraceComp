@@ -12,7 +12,7 @@ import service_pb2_grpc
 
 
 pathModules="modules.c" 
-pathSyscalls="parsed.txt"
+pathSyscalls="syscalls.txt"
 fileDesc={}
 
 def load_modules():
