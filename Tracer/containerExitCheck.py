@@ -16,9 +16,6 @@ client = docker.from_env()
 
 class ComunicationServicer(service_pb2_grpc.ComunicationServicer):
 
-    # calculator.square_root is exposed here
-    # the request and response are of the data type
-    # calculator_pb2.Number
     def AddUuts(self, request, context):
         response = service_pb2.Cofirmation()
         print("Waiting for "+request.uts+ " to exit")
