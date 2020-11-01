@@ -27,3 +27,8 @@ pip3 install -r requirements
 [PhpMail](https://github.com/0xSmiley/Runtime/blob/master/PoC/PhpMail/README.md). <br/>
 [Nginx](https://github.com/0xSmiley/Runtime/blob/master/PoC/Nginx/README.md). <br/>
 [Apache](https://github.com/0xSmiley/Runtime/blob/master/PoC/ApacheTomcat/README.md). <br/>
+
+# Thesis
+
+This project is the result of my thesis in the Information Security Master's Degree, unfortunatly I never managed to conclude it. In case you need more information about this project, you can check out my unnoficial thesis.
+[Thesis](https://github.com/0xSmiley/TraceComp/blob/master/Thesis.pdf). <br/>
