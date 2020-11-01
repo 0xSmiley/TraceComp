@@ -30,7 +30,7 @@ pip3 install -r requirements
 
 # Thesis
 
-This project is the result of my thesis in the Information Security Master's Degree, unfortunatly I never managed to conclude it. 
+This project is the result of my thesis in the Information Security Master's Degree, unfortunatly I never managed to conclude it.  <br/>
 In case you need more information about this project, you can check out my unnoficial thesis.
 
 [Thesis](https://github.com/0xSmiley/TraceComp/blob/master/Thesis.pdf). <br/>
